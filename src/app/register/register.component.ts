@@ -18,10 +18,10 @@ export class RegisterComponent implements OnInit {
   constructor(private toastr: ToastrService, private router: Router, private apiservice: OlxTestServicesService) {
 
     this.adduserForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]),
-      phone: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.pattern('^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$')]),
-      password: new FormControl('', [Validators.required, Validators.pattern('(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$')]),
+      name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z]+([ \-'][a-zA-Z]+)*$/)]),
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^(?:\+91|0)?[6789]\d{9}$/)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]),
+      password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).+$/), Validators.minLength(6), Validators.maxLength(50)]),
       confirm_pass: new FormControl('', [Validators.required, this.confirmPass()])
     })
 
@@ -42,12 +42,13 @@ export class RegisterComponent implements OnInit {
       this.apiservice.userRegister(this.adduserForm.value).subscribe({
         next: (res: any) => {
           if (res.success == true) {
-            this.toastr.success('sucess', res.msg)
+            this.toastr.success('sucess', res.message)
             this.router.navigateByUrl('login')
 
           }
           else {
-            this.toastr.error('error', res.msg)
+            // console.log(res)
+            this.toastr.error('error', res.message)
           }
 
         },

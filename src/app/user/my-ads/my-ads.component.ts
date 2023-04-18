@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { OlxTestServicesService } from 'src/app/shared/olx/olx-test-services.service';
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-my-ads',
   templateUrl: './my-ads.component.html',
@@ -11,9 +12,10 @@ import { OlxTestServicesService } from 'src/app/shared/olx/olx-test-services.ser
 })
 export class MyAdsComponent implements OnInit {
 
+  noPostsAreThere: boolean = false
 
   imageurl: any
-  constructor(private authservice: AuthService, private apiservice: OlxTestServicesService, private spinner: NgxSpinnerService, private sanitizer: DomSanitizer, @Inject('imageurl') _imageurl: any) {
+  constructor(private authservice: AuthService, private apiservice: OlxTestServicesService, private spinner: NgxSpinnerService, private sanitizer: DomSanitizer, @Inject('imageurl') _imageurl: any, private toastr: ToastrService) {
     this.imageurl = _imageurl
   }
 
@@ -28,20 +30,25 @@ export class MyAdsComponent implements OnInit {
   Post_data = []
 
   ngOnInit(): void {
-    this.spinner.show()
     this.userid = this.authservice.getuserId()
-    // console.log(this.userid)
+    this.viewpost()
+  }
+
+  viewpost() {
+
+    this.spinner.show()
     this.apiservice.viewpost({ userId: this.userid }).subscribe({
       next: (res: any) => {
         if (res.success == true) {
-          console.log(res)
           this.Post_data = res.data
           this.spinner.hide()
-
         }
         else {
           console.log(res)
           this.spinner.hide()
+          this.noPostsAreThere = true
+          console.log(this.noPostsAreThere)
+
         }
       }
       , error: (err: any) => {
@@ -52,6 +59,40 @@ export class MyAdsComponent implements OnInit {
   }
 
   deletepost(id: any) {
-    alert(id)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiservice.deletepost({ PostId: id }).subscribe({
+          next: (res: any) => {
+
+            if (res.success == true) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.toastr.success(res.message)
+              this.viewpost()
+
+            }
+            else {
+              this.toastr.success(res.message)
+            }
+          },
+          error: (err: any) => {
+            this.toastr.error(err)
+
+          }
+        })
+
+      }
+    })
   }
 }

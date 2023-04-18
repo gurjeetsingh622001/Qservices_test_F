@@ -33,9 +33,22 @@ export class PostAdsComponent implements OnInit {
   }
 
   change(event: any) {
-    this.selected_image = event.target.files[0];
+    const file = event.target.files[0];
+    const ext = file.name.split('.').pop().toLowerCase();
+
+    if (ext !== 'jpg') {
+      // clear the input and show an error message
+      event.target.value = null;
+      this.adForm.patchValue({ 'image': '' });
+      this.adForm?.get('image')?.setErrors({ 'pattern': true });
+      return;
+    }
+
+    // if the file is valid, assign it to the image FormControl
+    this.selected_image = file;
     this.adForm.patchValue({ 'image': this.selected_image });
   }
+
 
   post() {
     // console.log(this.adForm.value)

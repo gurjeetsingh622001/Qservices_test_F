@@ -39,4 +39,8 @@ export class OlxTestServicesService {
     return this.http.post(this.userurl + 'editPostbyId', form)
   }
 
+  deletepost(id: { PostId: string }) {
+    return this.http.post(this.userurl + 'deletepost', id)
+
+  }
 }

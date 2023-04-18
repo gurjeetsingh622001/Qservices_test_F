@@ -48,9 +48,8 @@
 
                 <div class="form-group">
                     <label class="label">Image</label>
-                    <!-- <input type="file" formControlName="image" class="form-control"
-                        [class.is-invalid]="get['image'].invalid && get['image'].touched" (change)="change($event)"> -->
-                        <input type="file"   class="form-control"
+                 
+                        <input type="file"   class="form-control"  
                         [class.is-invalid]="get['image'].invalid && get['image'].touched" (change)="change($event)">
                 </div>
 
@@ -58,6 +57,10 @@
 
                     <div *ngIf="get['image'].errors &&get['image'].errors['required']">
                         image is required
+                    </div>
+
+                    <div *ngIf="get['image'].errors &&get['image'].errors['pattern']">
+                        jpg
                     </div>
 
                 </div>

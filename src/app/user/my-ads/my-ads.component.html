@@ -1,9 +1,32 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 
 <div class="container-fluid">
+
+    <div class="row justify-content-center mt-5" *ngIf="noPostsAreThere">
+
+        <div class="col-md-10">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>
+                        Oops.....
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Sorry You Have not Posted </h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a routerLink="/user/postads" class="btn btn-primary">Make a Post</a>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus quisquam perspiciatis, unde dolor,
+                    beatae eligendi quos maiores quasi mollitia nostrum rem dicta laudantium modi qui nulla ad.
+                    Cupiditate, laboriosam quasi.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <div class="row">
-
-
         <div class="col-md-4 mt-3" *ngFor="let post of Post_data">
 
             <div class="card mb-3" style="max-width: 540px;">
@@ -29,7 +52,7 @@
                         <a class="btn btn-primary" [routerLink]="['/user/editpost',post['_id']]">Edit</a>
                         <a class="btn btn-primary" (click)="deletepost(post['_id'])">Delete</a>
                     </div>
-                    
+
                 </div>
             </div>
 
