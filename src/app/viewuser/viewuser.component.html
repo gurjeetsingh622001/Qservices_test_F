@@ -1,0 +1,38 @@
+<p>manange data</p>
+
+<table class="table" border="1px">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Edit</th>
+    </tr>
+    <tr *ngFor="let user of userdata ;let i= index">
+        <td>{{ i }}</td>
+        <td>{{user['name']}}</td>
+        <td>{{user['email']}}</td>
+        <td>
+            <a [routerLink]="['/edituser',user['id']]"> <i class="fa fa-edit"></i></a>
+        </td>
+       
+    </tr>
+
+</table>
+
+ 
+<!-- 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"  *ngFor="let user of userdata ;let i= index">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">S.NO:{{ i }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">name:{{user['name']}}</h5>
+                    <p class="card-text"> Email:{{user['email']}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div> -->

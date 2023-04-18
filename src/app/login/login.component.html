@@ -1,0 +1,8 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<p>login page</p>
+<form [formGroup]="loginForm">
+    Email<input type="text" formControlName="email" required><br>
+    Password<input type="password" formControlName="password" required>
+    <button (click)="login()">login</button>
+</form>
