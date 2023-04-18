@@ -16,6 +16,7 @@ import { UDashComponent } from './user/u-dash/u-dash.component';
 import { MyAdsComponent } from './user/my-ads/my-ads.component';
 import { PostAdsComponent } from './user/post-ads/post-ads.component';
 import { PostComponent } from './home/post/post.component';
+import { EditPostComponent } from './user/edit-post/edit-post.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home/dashboard', pathMatch: 'full' },
@@ -33,7 +34,8 @@ const routes: Routes = [
     children: [
       { path: 'u_dash', component: UDashComponent },
       { path: 'myads', component: MyAdsComponent },
-      { path: 'postads', component: PostAdsComponent }
+      { path: 'postads', component: PostAdsComponent },
+      { path: 'editpost/:_id', component: EditPostComponent }
     ]
   },
 
