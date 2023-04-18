@@ -18,6 +18,14 @@ import { AddBrandComponent } from './brand/add-brand/add-brand.component';
 import { ViewBrandComponent } from './brand/view-brand/view-brand.component';
 import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './home/header/header.component';
+import { DashboardComponent } from './home/dashboard/dashboard.component';
+import { UserComponent } from './user/user.component';
+import { NavComponent } from './user/nav/nav.component';
+import { UDashComponent } from './user/u-dash/u-dash.component';
+import { MyAdsComponent } from './user/my-ads/my-ads.component';
+import { PostAdsComponent } from './user/post-ads/post-ads.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +38,15 @@ import { CartComponent } from './cart/cart.component';
     AddBrandComponent,
     ViewBrandComponent,
     ProductsComponent,
-    CartComponent
+    CartComponent,
+    HomeComponent,
+    HeaderComponent,
+    DashboardComponent,
+    UserComponent,
+    NavComponent,
+    UDashComponent,
+    MyAdsComponent,
+    PostAdsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
