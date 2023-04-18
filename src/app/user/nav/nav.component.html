@@ -9,20 +9,20 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Ads</a>
+                    <a class="btn btn-success"  routerLink="/user/myads" >My Ads</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Post Ad</a>
+                    <a class="btn btn-success ms-2" routerLink="/user/postads">Post Ad</a>
                 </li>
 
 
             </ul>
         </div>
 
-        <a class="btn btn-primary" routerLink="/login">Logout</a>
+        <a class="btn btn-primary" (click)="logout()">Logout</a>
 
     </div>
 </nav>

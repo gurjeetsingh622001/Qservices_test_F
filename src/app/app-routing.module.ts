@@ -15,6 +15,7 @@ import { UserComponent } from './user/user.component';
 import { UDashComponent } from './user/u-dash/u-dash.component';
 import { MyAdsComponent } from './user/my-ads/my-ads.component';
 import { PostAdsComponent } from './user/post-ads/post-ads.component';
+import { PostComponent } from './home/post/post.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home/dashboard', pathMatch: 'full' },
@@ -23,11 +24,12 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent }
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'post/:id', component: PostComponent }
     ]
   },
   {
-    path: 'user', component: UserComponent,
+    path: 'user', component: UserComponent, canActivate: [Authguard],
     children: [
       { path: 'u_dash', component: UDashComponent },
       { path: 'myads', component: MyAdsComponent },
@@ -35,7 +37,7 @@ const routes: Routes = [
     ]
   },
 
-  { path: 'welcome', component: WelcomeComponent, canActivate: [Authguard] },
+  { path: 'welcome', component: WelcomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'viewuser', component: ViewuserComponent },
   { path: 'edituser/:id', component: EdituserComponent },

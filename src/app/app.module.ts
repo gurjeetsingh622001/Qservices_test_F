@@ -26,6 +26,7 @@ import { NavComponent } from './user/nav/nav.component';
 import { UDashComponent } from './user/u-dash/u-dash.component';
 import { MyAdsComponent } from './user/my-ads/my-ads.component';
 import { PostAdsComponent } from './user/post-ads/post-ads.component';
+import { PostComponent } from './home/post/post.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PostAdsComponent } from './user/post-ads/post-ads.component';
     NavComponent,
     UDashComponent,
     MyAdsComponent,
-    PostAdsComponent
+    PostAdsComponent,
+    PostComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

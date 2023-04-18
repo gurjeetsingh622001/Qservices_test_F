@@ -1,11 +1,4 @@
-<!-- <p>register works!</p>
-<form [formGroup]="adduserForm">
-    name<input type="name" formControlName="name"><br>
-    Email<input type="text" formControlName="email" required><br>
-    Password<input type="password" formControlName="password" required><br>
-    <button (click)="register()">register</button>
-</form> -->
-
+ 
 <div class="container-fluid background_1">
 
     <div class="row justify-content-center">
@@ -50,6 +43,17 @@
 
                 </div>
 
+                <div class="form-group">
+                    <label class="label">Phone</label>
+                    <input type="name" formControlName="phone" class="form-control"
+                        [class.is-invalid]="get['phone'].invalid && get['phone'].touched">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="get['phone'].invalid && get['phone'].touched">
+                    <div *ngIf="get['phone'].errors &&get['phone'].errors['required']">
+                        Phone is required
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="label">Password</label>
@@ -92,7 +96,7 @@
                         <a routerLink="/login">Already have a account</a>
                     </div>
                 </div>
-                
+
             </form>
         </div>
     </div>

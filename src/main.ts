@@ -11,9 +11,19 @@ if (environment.production) {
 export function baseurl() {
   return "https://student.gulati.ksesystem.com/public/api/"
 }
-const provider = [
-  { provide: 'baseurl', useFactory: baseurl, deps: [] }
 
+export function userurl() {
+  return "http://localhost:5000/user/"
+}
+
+export function imageurl() {
+  return "http://localhost:5000/"
+}
+
+const provider = [
+  { provide: 'baseurl', useFactory: baseurl, deps: [] },
+  { provide: 'userurl', useFactory: userurl, deps: [] },
+  { provide: 'imageurl', useFactory: imageurl, deps: [] },
 ]
 platformBrowserDynamic(provider).bootstrapModule(AppModule)
   .catch(err => console.error(err));

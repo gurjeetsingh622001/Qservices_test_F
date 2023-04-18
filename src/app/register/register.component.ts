@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators, ValidatorFn, AbstractControl } from
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../shared/user/user.service';
+import { OlxTestServicesService } from '../shared/olx/olx-test-services.service';
 
 @Component({
   selector: 'app-register',
@@ -11,13 +12,14 @@ import { UserService } from '../shared/user/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  buttonValidation: Boolean = false
+  // buttonValidation: Boolean = false
   adduserForm: FormGroup;
 
-  constructor(private userservice: UserService, private toastr: ToastrService, private router: Router) {
+  constructor(private toastr: ToastrService, private router: Router, private apiservice: OlxTestServicesService) {
 
     this.adduserForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]),
+      phone: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern('^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$')]),
       confirm_pass: new FormControl('', [Validators.required, this.confirmPass()])
@@ -32,26 +34,25 @@ export class RegisterComponent implements OnInit {
   // / Asad123@@ 
 
   register() {
-    this.buttonValidation = true
+    // this.buttonValidation = true
     if (this.adduserForm.status === 'INVALID') {
       return this.adduserForm.markAllAsTouched();
     }
     else {
-      this.userservice.register(this.adduserForm.value).subscribe({
-        next: (result: any) => {
-          // console.log(result)
-          if (result.response.status == true) {
-            this.toastr.success('sucess', result.response.msg)
+      this.apiservice.userRegister(this.adduserForm.value).subscribe({
+        next: (res: any) => {
+          if (res.success == true) {
+            this.toastr.success('sucess', res.msg)
             this.router.navigateByUrl('login')
 
           }
           else {
-            this.toastr.error('error', result.response.msg)
+            this.toastr.error('error', res.msg)
           }
 
         },
         error: (err) => {
-          this.toastr.error('error', 'fill data')
+          this.toastr.error('error', 'some thing went Wrong')
         }
       })
     }

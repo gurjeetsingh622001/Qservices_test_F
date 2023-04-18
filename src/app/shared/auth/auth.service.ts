@@ -5,22 +5,32 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  createdata(response: any) {
-    // console.log(data)
-    localStorage.setItem("token", response.token)
-    localStorage.setItem("email", response.data.email)
+  // saving token user token in local storge  code starts 
+  storetoken(data: any) {
+    localStorage.setItem("token", data.token)
   }
-  getservice() {
 
-    return localStorage.getItem("email")
-  }
   gettoken() {
     return localStorage.getItem("token")
   }
-  destroyservice() {
+  destroytoken() {
     localStorage.removeItem("token")
-    localStorage.removeItem("email")
   }
+  // saving token user token in local storge  code starts 
+
+  //saving user Id 
+  saveuserId(data: any) {
+    localStorage.setItem('userId', data.userId)
+  }
+
+  getuserId() {
+    return localStorage.getItem('userId')
+  }
+
+  destroyId() {
+    localStorage.removeItem('userId')
+  }
+
 
   constructor() { }
 }

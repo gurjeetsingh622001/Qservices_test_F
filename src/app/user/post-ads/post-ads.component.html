@@ -1,1 +1,87 @@
-<p>post-ads works!</p>
+<div class="contanier-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-4 mt-5">
+            <form [formGroup]="adForm">
+                <div class="heading justify-content-center">
+                    <h1>Post Form</h1>
+                </div>
+
+                <div class="form-group">
+                    <label class="label">Title</label>
+                    <input type="name" formControlName="title" class="form-control"
+                        [class.is-invalid]="get['title'].invalid && get['title'].touched">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="get['title'].invalid && get['title'].touched">
+
+                    <div *ngIf="get['title'].errors &&get['title'].errors['required']">
+                        title is required
+                    </div>
+                    <div *ngIf="get['title'].errors &&get['title'].errors['minlength']">
+                        minimun lenght 10
+                    </div>
+                    <div *ngIf="get['title'].errors &&get['title'].errors['maxlength']">
+                        maximun lenght 50
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="label">Description</label>
+                    <input type="name" formControlName="description" class="form-control"
+                        [class.is-invalid]="get['description'].invalid && get['description'].touched">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="get['description'].invalid && get['description'].touched">
+
+                    <div *ngIf="get['description'].errors &&get['description'].errors['required']">
+                        description is required
+                    </div>
+                    <div *ngIf="get['description'].errors &&get['description'].errors['minlength']">
+                        minimun lenght 50
+                    </div>
+                    <div *ngIf="get['description'].errors &&get['description'].errors['maxlength']"> 
+                        maximun lenght 500
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="label">Image</label>
+                    <!-- <input type="file" formControlName="image" class="form-control"
+                        [class.is-invalid]="get['image'].invalid && get['image'].touched" (change)="change($event)"> -->
+                        <input type="file"   class="form-control"
+                        [class.is-invalid]="get['image'].invalid && get['image'].touched" (change)="change($event)">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="get['image'].invalid && get['image'].touched">
+
+                    <div *ngIf="get['image'].errors &&get['image'].errors['required']">
+                        image is required
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="label">Price</label>
+                    <input type="text" formControlName="price" class="form-control"
+                        [class.is-invalid]="get['price'].invalid && get['price'].touched">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="get['price'].invalid && get['price'].touched">
+
+                    <div *ngIf="get['price'].errors &&get['price'].errors['required']">
+                        Price is required
+                    </div>
+
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" (click)="post()">Post</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

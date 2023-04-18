@@ -13,17 +13,17 @@ export class WelcomeComponent implements OnInit {
    
   
   ngOnInit(): void {
-    console.log(this.authservice.gettoken())
+    // console.log(this.authservice.gettoken())
   } 
   
   
-  logout() {
+  // logout() {
 
-    // console.log(this.authservice.destroyservice)
+  //   // console.log(this.authservice.destroyservice)
   
-    this.authservice.destroyservice();
-    this.router.navigateByUrl('/login')
+  //   this.authservice.destroyservice();
+  //   this.router.navigateByUrl('/login')
   
   
-  }
+  // }
 }

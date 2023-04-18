@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../shared/auth/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { UserService } from '../shared/user/user.service';
+import { OlxTestServicesService } from '../shared/olx/olx-test-services.service';
 
 @Component({
   selector: 'app-login',
@@ -16,49 +17,52 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private toastr: ToastrService, private authservice: AuthService, private spinner: NgxSpinnerService, private userservice: UserService) {
+  constructor(private router: Router, private toastr: ToastrService, private authservice: AuthService, private spinner: NgxSpinnerService, private apiservice: OlxTestServicesService) {
 
     this.loginForm = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl()
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
 
     })
   }
 
   ngOnInit(): void {
 
-    if (this.authservice.getservice() != null) {
-      this.router.navigateByUrl('welcome')
-
+    if (this.authservice.gettoken() != null) {
+      this.router.navigateByUrl('/user/u_dash')
     }
   }
 
   login() {
-    this.router.navigateByUrl('/user/u_dash')
-    
-    // this.userservice.login(this.loginForm.value).subscribe(
-    //   (res: any) => {
-    //     console.log(res)
-    //     if (res.response.status) {
-    //       this.authservice.createdata(res.response
-    //       )
-    //       this.toastr.success('sucess', res.response.msg)
-    //       this.router.navigateByUrl('welcome')
-    //     }
-    //     else {
-    //       this.toastr.error('error', res.response.msg)
-    //     }
-    //   },
-    //   (err: any) => {
-    //     console.log(err)
-    //     this.spinner.hide()
-    //     this.toastr.error('error', 'try again')
-    //   }
-    // )
-
+    if (this.loginForm.status === 'INVALID') {
+      return this.loginForm.markAllAsTouched();
+    }
+    else {
+      this.spinner.show();
+      this.apiservice.userLogin(this.loginForm.value).subscribe({
+        next: (res: any) => {
+          // console.log(res)
+          if (res.success == true) {
+            this.toastr.success(res.message)
+            this.router.navigateByUrl('/user/postads')
+            this.authservice.storetoken(res)
+            this.authservice.saveuserId(res)
+            this.spinner.hide();
+          }
+          else {
+            this.toastr.error('Error', res.message)
+            this.spinner.hide();
+          }
+        },
+        error: (err: any) => {
+          this.toastr.error('Error', err.message)
+          this.spinner.hide();
+        }
+      })
+    }
   }
-   
-  get get(){
+
+  get get() {
     return this.loginForm.controls
   }
 }

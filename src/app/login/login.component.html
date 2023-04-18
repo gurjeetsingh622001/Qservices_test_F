@@ -1,11 +1,4 @@
-<!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
-
-<!-- <p>login page</p>
-<form [formGroup]="loginForm">
-    Email<input type="text" formControlName="email" required><br>
-    Password<input type="password" formControlName="password" required>
-    <button (click)="login()">login</button>
-</form> -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 
 <div class="container-fluid background_1">
 
@@ -25,7 +18,7 @@
                 <div class="alert alert-danger" *ngIf="get['email'].invalid && get['email'].touched">
 
                     <div *ngIf="get['email'].errors &&get['email'].errors['required']">
-                        Name is required
+                        Email is required
                     </div>
 
                 </div>
@@ -38,8 +31,8 @@
 
                 <div class="alert alert-danger" *ngIf="get['password'].invalid && get['password'].touched">
 
-                    <div *ngIf="get['password'].errors &&get['password'].errors['required']">
-                        Name is required
+                    <div *ngIf="get['password'].errors && get['password'].errors['required']">
+                        Password is required
                     </div>
 
                 </div>
