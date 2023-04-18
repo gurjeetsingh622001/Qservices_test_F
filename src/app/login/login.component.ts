@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.authservice.gettoken() != null) {
-      this.router.navigateByUrl('/user/u_dash')
+      this.router.navigateByUrl('/user/myads')
     }
   }
 
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           // console.log(res)
           if (res.success == true) {
             this.toastr.success(res.message)
-            this.router.navigateByUrl('/user/postads')
+            this.router.navigateByUrl('/user/myads')
             this.authservice.storetoken(res)
             this.authservice.saveuserId(res)
             this.spinner.hide();

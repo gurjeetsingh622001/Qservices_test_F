@@ -35,4 +35,8 @@ export class OlxTestServicesService {
     return this.http.post(this.userurl + 'getPostByPostId', id)
   }
 
+  editPostbyId(form: any) {
+    return this.http.post(this.userurl + 'editPostbyId', form)
+  }
+
 }

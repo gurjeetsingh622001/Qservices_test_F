@@ -26,8 +26,8 @@
 
                 <div class="row  g-0 justify-content-end">
                     <div class="col-md">
-                        <a class="btn btn-primary" [routerLink]="['']">Edit</a>
-                        <a class="btn btn-primary">Delete</a>
+                        <a class="btn btn-primary" [routerLink]="['/user/editpost',post['_id']]">Edit</a>
+                        <a class="btn btn-primary" (click)="deletepost(post['_id'])">Delete</a>
                     </div>
                     
                 </div>

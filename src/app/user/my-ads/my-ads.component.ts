@@ -51,4 +51,7 @@ export class MyAdsComponent implements OnInit {
     })
   }
 
+  deletepost(id: any) {
+    alert(id)
+  }
 }
