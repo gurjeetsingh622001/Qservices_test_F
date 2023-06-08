@@ -33,34 +33,34 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login() {
-    if (this.loginForm.status === 'INVALID') {
-      return this.loginForm.markAllAsTouched();
-    }
-    else {
-      this.spinner.show();
-      this.apiservice.userLogin(this.loginForm.value).subscribe({
-        next: (res: any) => {
-          // console.log(res)
-          if (res.success == true) {
-            this.toastr.success(res.message)
-            this.router.navigateByUrl('/user/myads')
-            this.authservice.storetoken(res)
-            this.authservice.saveuserId(res)
-            this.spinner.hide();
-          }
-          else {
-            this.toastr.error('Error', res.message)
-            this.spinner.hide();
-          }
-        },
-        error: (err: any) => {
-          this.toastr.error('Error', err.message)
-          this.spinner.hide();
-        }
-      })
-    }
-  }
+  // login() {
+  //   if (this.loginForm.status === 'INVALID') {
+  //     return this.loginForm.markAllAsTouched();
+  //   }
+  //   else {
+  //     this.spinner.show();
+  //     this.apiservice.userLogin(this.loginForm.value).subscribe({
+  //       next: (res: any) => {
+  //         // console.log(res)
+  //         if (res.success == true) {
+  //           this.toastr.success(res.message)
+  //           this.router.navigateByUrl('/user/myads')
+  //           this.authservice.storetoken(res)
+  //           this.authservice.saveuserId(res)
+  //           this.spinner.hide();
+  //         }
+  //         else {
+  //           this.toastr.error('Error', res.message)
+  //           this.spinner.hide();
+  //         }
+  //       },
+  //       error: (err: any) => {
+  //         this.toastr.error('Error', err.message)
+  //         this.spinner.hide();
+  //       }
+  //     })
+  //   }
+  // }
 
   get get() {
     return this.loginForm.controls

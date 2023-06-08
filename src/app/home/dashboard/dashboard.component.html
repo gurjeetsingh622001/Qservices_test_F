@@ -18,20 +18,24 @@
 
     <div class="col-md-4 mt-3" *ngFor="let post of All_Posts">
 
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img [src]="getimageurl(post['image'])" class="img-fluid rounded-start" alt="...">
-          </div>
 
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Title</h5>
-              <p class="card-text">{{post['title']}}</p>
+      <div class="card profile-card-5 ms-4 mt-3">
 
-            </div>
-            <a class="btn btn-primary" role="btn" [routerLink]="['/home/post',post['_id']]">view</a>
-          </div>
+        <div class="card-img-block">
+          <img [src]="getimageurl(post['image'])" class="img-fluid img_1 rounded-start" alt="...">
+        </div>
+        <div class="card-body pt-0">
+          <h5 class="card-title"> <span class="text_2">Title : </span>
+            {{post['title']}}</h5>
+
+
+          <button type="button" class="btn btn-warning ms-2">
+            <a  role="btn" [routerLink]="['/home/post',post['_id']]">
+              View<i class="bi bi-eye-fill ms-2" style="font-size: 1rem; color: rgb(35, 109, 246);">
+              </i>
+            </a>
+          </button>
+
         </div>
       </div>
 

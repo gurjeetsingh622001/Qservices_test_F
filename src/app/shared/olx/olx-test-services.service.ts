@@ -24,7 +24,7 @@ export class OlxTestServicesService {
   }
 
   viewpost(id: any) {
-    return this.http.post(this.userurl + 'viewpost', id)
+    return this.http.post(this.userurl + 'viewmypost', id)
   }
 
   viewallpost() {

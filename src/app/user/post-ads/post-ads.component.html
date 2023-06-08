@@ -1,4 +1,6 @@
-<div class="contanier-fluid">
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<div class="contanier-fluid ">
     <div class="row justify-content-center">
         <div class="col-md-4 mt-5">
             <form [formGroup]="adForm">
@@ -28,8 +30,10 @@
 
                 <div class="form-group">
                     <label class="label">Description</label>
-                    <input type="name" formControlName="description" class="form-control"
-                        [class.is-invalid]="get['description'].invalid && get['description'].touched">
+                    <!-- <input type="textarea" formControlName="description"
+                        [class.is-invalid]="get['description'].invalid && get['description'].touched"> -->
+                    <textarea class="form-control" formControlName="description"
+                    [class.is-invalid]="get['description'].invalid && get['description'].touched"></textarea>
                 </div>
 
                 <div class="alert alert-danger" *ngIf="get['description'].invalid && get['description'].touched">
@@ -40,7 +44,7 @@
                     <div *ngIf="get['description'].errors &&get['description'].errors['minlength']">
                         minimun lenght 50
                     </div>
-                    <div *ngIf="get['description'].errors &&get['description'].errors['maxlength']"> 
+                    <div *ngIf="get['description'].errors &&get['description'].errors['maxlength']">
                         maximun lenght 500
                     </div>
 
@@ -48,8 +52,8 @@
 
                 <div class="form-group">
                     <label class="label">Image</label>
-                 
-                        <input type="file"   class="form-control"  
+
+                    <input type="file" class="form-control"
                         [class.is-invalid]="get['image'].invalid && get['image'].touched" (change)="change($event)">
                 </div>
 
@@ -75,6 +79,9 @@
 
                     <div *ngIf="get['price'].errors &&get['price'].errors['required']">
                         Price is required
+                    </div>
+                    <div *ngIf="get['price'].errors &&get['price'].errors['pattern']">
+                        only numbers allowed
                     </div>
 
                 </div>

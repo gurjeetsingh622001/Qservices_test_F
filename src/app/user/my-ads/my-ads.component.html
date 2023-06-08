@@ -1,63 +1,71 @@
-<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<div class="container-fluid m-0 p-0">
 
-<div class="container-fluid">
 
-    <div class="row justify-content-center mt-5" *ngIf="noPostsAreThere">
+    <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 
-        <div class="col-md-10">
-            <div class="card text-center">
-                <div class="card-header">
-                    <h3>
-                        Oops.....
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Sorry You Have not Posted </h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a routerLink="/user/postads" class="btn btn-primary">Make a Post</a>
-                </div>
-                <div class="card-footer text-body-secondary">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus quisquam perspiciatis, unde dolor,
-                    beatae eligendi quos maiores quasi mollitia nostrum rem dicta laudantium modi qui nulla ad.
-                    Cupiditate, laboriosam quasi.
-                </div>
-            </div>
-        </div>
+    <div class="background_1 ">
 
-    </div>
+        <div class="row justify-content-center mt-5" *ngIf="noPostsAreThere">
 
-    <div class="row">
-        <div class="col-md-4 mt-3" *ngFor="let post of Post_data">
-
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img [src]="getimageurl(post['image'])" class="img-fluid rounded-start" alt="...">
+            <div class="col-md-10">
+                <div class="card card_1 text-center">
+                    <div class="card-header">
+                        <h3>
+                            Oops.....
+                        </h3>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text">{{post['title']}}</p>
-                            <h5 class="card-title">Description</h5>
-                            <p class="card-text"><small class="text-body-secondary">
-                                    {{post['description']}}
-                                </small></p>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row  g-0 justify-content-end">
-                    <div class="col-md">
-                        <a class="btn btn-primary" [routerLink]="['/user/editpost',post['_id']]">Edit</a>
-                        <a class="btn btn-primary" (click)="deletepost(post['_id'])">Delete</a>
+                    <div class="card-body">
+                        <h5 class="card-title">Sorry You Have not Posted </h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a routerLink="/user/postads" class="btn btn-primary btn-lg">Make A Post</a>
+                        <img src="../../../assets/pngaaa.com-8535520.png" class="card_img">
                     </div>
 
+                    <div class="card-footer text-body-secondary bg-light">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus quisquam perspiciatis, unde
+                        dolor,
+                        beatae eligendi quos maiores quasi mollitia nostrum rem dicta laudantium modi qui nulla ad.
+                        Cupiditate, laboriosam quasi.
+                    </div>
                 </div>
             </div>
 
         </div>
+
+        <div class="row">
+            <div class="col-md-4 mt-3" *ngFor="let post of Post_data">
+
+                <div class="card profile-card-5 ms-4 mt-3">
+
+                    <div class="card-img-block">
+                        <img class="card-img-top" [src]="getimageurl(post['image'])" alt="Card image cap">
+                    </div>
+                    <div class="card-body pt-0">
+                        <h5 class="card-title"> <span class="text_2">Title : </span>
+                            {{post['title']}}</h5>
+                        <p> <span  class="text_2" >Description</span>: &nbsp;{{post['description']}}</p>
+
+                        <button type="button" class="btn btn-warning" (click)="deletepost(post['_id'])">
+                            Delete<i class="bi bi-trash " style="font-size: 1rem; color: rgb(4, 91, 253);">
+                            </i>
+                        </button>
+
+                        <button type="button" class="btn btn-warning ms-2">
+                            <a [routerLink]="['/user/editpost',post['_id']]">
+
+                                update<i class="bi bi-pencil" style="font-size: 1rem; color: rgb(35, 109, 246);">
+                                </i>
+                            </a>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
 </div>
+
 
 <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque molestias sit veritatis? Sint sed necessitatibus harum quisquam provident perspiciatis error omnis iste voluptatibus. Cum eaque provident iusto quis, dignissimos maiores! -->

@@ -17,11 +17,11 @@ export class MyAdsComponent implements OnInit {
   imageurl: any
   constructor(private authservice: AuthService, private apiservice: OlxTestServicesService, private spinner: NgxSpinnerService, private sanitizer: DomSanitizer, @Inject('imageurl') _imageurl: any, private toastr: ToastrService) {
     this.imageurl = _imageurl
+    this.userid = this.authservice.getuserId()
+
   }
 
   getimageurl(imagename: any) {
-    // console.log(this.imageurl+"mechanic_profile/"+imagename)
-
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.imageurl + "olx_posts/" + imagename)
   }
 
@@ -30,30 +30,32 @@ export class MyAdsComponent implements OnInit {
   Post_data = []
 
   ngOnInit(): void {
-    this.userid = this.authservice.getuserId()
-    this.viewpost()
+    this.spinner.show()
+    this.viewpostbyId()
+    setTimeout(() => {
+      this.spinner.hide()
+    }, 3000)
   }
 
-  viewpost() {
-
-    this.spinner.show()
+  viewpostbyId() {
+    console.log('viewpostbyId called')
     this.apiservice.viewpost({ userId: this.userid }).subscribe({
       next: (res: any) => {
         if (res.success == true) {
           this.Post_data = res.data
-          this.spinner.hide()
+          console.log(res)
         }
         else {
           console.log(res)
-          this.spinner.hide()
-          this.noPostsAreThere = true
-          console.log(this.noPostsAreThere)
+          this.Post_data = []
 
+          this.noPostsAreThere = true
+          // console.log(this.noPostsAreThere)
         }
       }
       , error: (err: any) => {
         console.log(err)
-        this.spinner.hide()
+
       }
     })
   }
@@ -78,12 +80,13 @@ export class MyAdsComponent implements OnInit {
                 'Your file has been deleted.',
                 'success'
               )
+              console.log('ddddd')
+              this.viewpostbyId()
               this.toastr.success(res.message)
-              this.viewpost()
 
             }
             else {
-              this.toastr.success(res.message)
+              this.toastr.error(res.message)
             }
           },
           error: (err: any) => {
@@ -95,4 +98,5 @@ export class MyAdsComponent implements OnInit {
       }
     })
   }
+
 }

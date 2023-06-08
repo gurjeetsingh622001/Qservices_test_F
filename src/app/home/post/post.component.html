@@ -1,27 +1,28 @@
-<!-- <p>post works!</p> -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8">
-            <img [src]="getimageurl(Post_data?.image)" class="img-fluid image_1">
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="row">
-                <h1>Price:{{Post_data?.price | currency :'INR'}}</h1>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<div class="contanier-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <img [src]="getimageurl(Post_data?.image)" class="img-fluid image_1">
             </div>
 
-            <div class="row" *ngIf="isUserLoggedin">
-                <h1>{{Post_data?.['userId'].phone}}</h1>
-            </div>
+            <div class="col-md-4">
 
-            <div class="row" *ngIf="!isUserLoggedin">
-                <div class="col-md">
-                    <a class="btn btn-success">Login</a>
+                <div class="mt-5">
+                    <h1 class="text"> Price &nbsp; &nbsp;{{Post_data?.price | currency :'INR'}}</h1>
                 </div>
+
+                <div class="row mt-5" *ngIf="isUserLoggedin">
+                    <h2 class="text1">Phone &nbsp; &nbsp;{{'+91'+Post_data?.['userId'].phone}}</h2>
+                </div>
+
+                <div class="row mt-5" *ngIf="!isUserLoggedin">
+                    <div class="col-md d-grid">
+                        <a class="btn  btn-outline-success btn-lg" routerLink="/login">Login</a>
+                    </div>
+                </div>
+
             </div>
 
         </div>
-
     </div>
-</div>

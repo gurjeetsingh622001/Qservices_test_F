@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { OlxTestServicesService } from 'src/app/shared/olx/olx-test-services.service';
@@ -15,13 +16,13 @@ export class PostAdsComponent implements OnInit {
   adForm: FormGroup;
   selected_image: any
 
-  constructor(private apiservice: OlxTestServicesService, private router: Router, private authsertvice: AuthService, private toastr: ToastrService) {
+  constructor(private apiservice: OlxTestServicesService, private router: Router, private authsertvice: AuthService, private toastr: ToastrService, private spinner: NgxSpinnerService) {
 
     this.adForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
       description: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(500)]),
       image: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required ,Validators.pattern('^[0-9]+$')]),
       userId: new FormControl('')
     })
 
@@ -51,12 +52,13 @@ export class PostAdsComponent implements OnInit {
 
 
   post() {
-    // console.log(this.adForm.value)
+    console.log(this.adForm.value)
     if (this.adForm.status === 'INVALID') {
       return this.adForm.markAllAsTouched();
+
     }
     else {
-
+      this.spinner.show()
       const formData = new FormData();
       formData.append('title', this.adForm.value.title);
       formData.append('description', this.adForm.value.description);
@@ -67,16 +69,27 @@ export class PostAdsComponent implements OnInit {
       this.apiservice.addpost(formData).subscribe({
         next: (res: any) => {
           if (res.success == true) {
-            // console.log(res)
+            console.log(res)
             this.toastr.success('Success', res.message)
+            setTimeout(() => {
+              this.spinner.hide();
+            }, 3000);
             this.router.navigateByUrl('/user/myads')
           }
           else {
             this.toastr.success('Success', res.message)
+            setTimeout(() => {
+              this.spinner.hide();
+            }, 3000);
+
           }
         },
         error: (err: any) => {
           this.toastr.error('Success', err)
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 3000);
+
         }
       })
     }
